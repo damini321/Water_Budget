@@ -1,0 +1,48 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %}
+Login
+{% endblock title %}
+{% block custom_css %}
+	<link rel="stylesheet" href="{% static '/css/authentication_styles.css' %}">
+{% endblock custom_css %}
+{% block navbar_custom_nav %}
+	<button class="btn  btn-danger" type="button" onclick="location.href={% url 'Register' %};">Register Now</button>
+{% endblock navbar_custom_nav %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div id="Login" class="col-md-4">
+			<h2 style="text-align: center; margin: 20px; color:red;"><b>LOGIN</b></h2>
+			<form class="form-control form-group"  method="post">
+			{% csrf_token %}
+			{% if login_error %}
+			<div class="form-group">
+				<div class="alert alert-danger" id="login_error">
+					<b>Please Enter Valid Username and Password!</b>
+				</div>
+			</div>
+			{% endif %}
+				<div class="form-group">
+					<label for="first_name"><b>User Name :</b></label>
+					<input type="text" class="form-control" name="username" autofocus placeholder="User Name" data-toggle="tooltip" data-placement="bottom" title="Enter User Name" required>
+				</div>
+				<div class="form-group">
+					<label for="login_password"><b>Password :</b></label>
+					<input type="password" class="form-control" name="password" id="login_password" placeholder="password" data-toggle="tooltip" data-placement="bottom" title="Enter Password" required>
+				</div>
+				<div class="form-group">
+					<a href="{% url 'ForgotPassword' %}" id="forget_pass_login">Forgot Password?</a>	
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success col-md-12" type="submit" id="login_login_button"><b>LOGIN</b></button>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-secondary col-md-12" type="reset" id="clear_login_button"><b>CLEAR</b></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

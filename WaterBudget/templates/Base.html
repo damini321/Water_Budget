@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Home Page{% endblock title %}</title>
+    {% block favicon %}
+   <link rel="icon" type="image/png" href={%static '/images/water-drop.png' %}>
+    {% endblock favicon %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Custom CSS FOR BASE HTML COMPULSARY FOR ALL PAGES BASED ON BASE.HTML -->
+    <link rel="stylesheet" href={%static '/css/base_style.css' %}>
+    {% block custom_css %}
+	{% endblock custom_css %}
+	{% block custom_js %}
+	{% endblock custom_js %}
+  	<style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+  </style>
+  </head>
+  <body>
+  	{% block navbar %}
+	  	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	  		<a class="navbar-brand"><img src={%static '/images/water-drop.png' %}></a>
+				<span class="navbar-text">WATER BUDGET</span>
+			<button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#collapse_target">
+		    	<span class="navbar-toggler-icon"></span>
+		    </button>
+		  	<div class="collapse navbar-collapse" id="collapse_target">
+		  		<ul class="navbar-nav ml-auto">
+		  		{% block home_view %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'Home' %}">HOME</a>
+					</li>
+					<li class="nav-item dropdown">
+        				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">INFORMATION<span class="caret"></span></a>
+        					<ul class="dropdown-menu dropdown-content">
+          						<li><a href="{% url 'Rice' %}"><b>RICE</b></a></li>
+          						<li><a href="{% url 'SugarCane' %}"><b>SUGARCANE</b></a></li>
+          						<li><a href="{% url 'Tomato' %}"><b>TOMATO</b></a></li>
+          						<li><a href="{% url 'Mango' %}"><b>MANGO</b></a></li>
+        					</ul>
+      				</li>
+      				{% endblock home_view %}
+      				{% block registered_navbar %}
+      				{% endblock registered_navbar %}
+					<li class="nav-item">
+					{% block navbar_custom_nav %}
+						<button class="btn  btn-danger" type="button" onclick="location.href={% url 'Register' %};">Register Now</button>
+			   			<button class="btn  btn-success" type="button" onclick="location.href={% url 'Login' %};">Login</button>
+			   		{% endblock navbar_custom_nav %}
+					</li>
+				</ul>
+			</div>
+		</nav>
+		{% endblock navbar %}
+	{% block content %}
+	{% endblock content %}
+	<footer>
+	{% block footer %}
+	{% endblock footer %}
+	</footer>
+ </body>
+</html>

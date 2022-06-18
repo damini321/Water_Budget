@@ -1,0 +1,83 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %}
+Register
+{% endblock title %}
+{% block custom_css %}
+	<link rel="stylesheet" href="{% static '/css/authentication_styles.css' %}">
+{% endblock custom_css %}
+{% block navbar_custom_nav %}
+	<button class="btn  btn-success" type="button" onclick="location.href={% url 'Login' %};">Login</button>
+{% endblock navbar_custom_nav %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div id="registration" class="col-md-6">
+		{% if registered_status %}
+			<div class="alert alert-success">Registration Successful ! Your Account will be activated by Administrator shortly. Thank you!</div>
+		{% endif %}
+			<h2 style="text-align: center; margin: 20px;"><b>Sign Up!</b></h2>
+			<form class="form-control form-group" method="post">
+			{% csrf_token %}
+				<div class="form-group">
+					<label for="first_name"><b>User Name :</b></label>
+					<input type="text" class="form-control" name="username" autofocus placeholder="User Name" data-toggle="tooltip" data-placement="bottom" title="Enter User Name" required>
+				</div>
+				{% if username_error %}
+				<div class="form-group">
+					<div class="alert alert-danger" id="username_error">
+					<b>UserName is Invalid or it is already in use. Select other UserName</b>
+					</div>
+				</div>
+				{% endif %}
+				<div class="form-group">
+					<label for="first_name"><b>First Name : </b></label>
+					<input type="text" class="form-control" name="first_name" autofocus placeholder="First Name" data-toggle="tooltip" data-placement="bottom" title="Enter First Name" required>
+				</div>
+				<div class="form-group">
+					<label for="last_name"><b>Last Name : </b></label>
+					<input type="text" class="form-control" name="last_name" placeholder="Last Name" data-toggle="tooltip" data-placement="bottom" title="Enter Last Name" required>
+				</div>
+				<div class="form-group">
+					<label for="email_address"><b>Email Address : </b></label>
+					<input type="email" class="form-control" name="email_address" placeholder="example@gmail.com" data-toggle="tooltip" data-placement="bottom" title="Enter Email Address" required>
+				</div>
+				{% if email_error %}
+				<div class="form-group">
+					<div class="alert alert-danger" id="email_error">
+					<b>Email Address Already in Use.</b>
+					</div>
+				</div>
+				{% endif %}
+				<div class="form-group">
+					<label for="password"><b>Password : </b></label>
+					<input type="password" class="form-control" name="password" placeholder="Password" data-toggle="tooltip" data-placement="bottom" title="Enter Password" required>
+				</div>
+				<div class="form-group">
+					<label for="confirm_password"><b>Confirm Password : </b></label>
+					<input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" data-toggle="tooltip" data-placement="bottom" title="Confirm Password" required>
+				</div>
+				{% if password_error %}
+				<div class="form-group">
+					<div class="alert alert-danger" id="username_error">
+					<b>password doesn't match or it does not follows password standards.</b>
+					</div>
+				</div>
+				{% endif %}
+				<div class="form-group">
+					<button class="btn btn-primary col-md-12" type="submit" name="sign_up_button"><b>Sign In</b></button>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-secondary col-md-12" type="reset" name="reset_button" ><b>Clear</b></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+{% endblock content %}
